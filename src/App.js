@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import "./App.css";
+import AuthContextProvider from "./context/AuthContextProvider";
+import AppRouter from "./router/AppRouter";
 
 function App() {
+ // Sayfa kapatıldığında veya yeniden yüklendiğinde çalışacak fonksiyon
+ const clearLocalStorageOnUnload = () => {
+  // localStorage'ı temizle
+  localStorage.clear();
+};
+
+// Sayfa bileşeni oluşturulduğunda componentdidmount gibi çalışır
+useEffect(() => {
+  // Sayfa kapatıldığında veya yeniden yüklendiğinde clearLocalStorageOnUnload fonksiyonunu çağır
+  window.addEventListener("beforeunload", clearLocalStorageOnUnload);
+
+  // Clean-up işlemi: bileşen kaldırıldığında eventListener'ı kaldır
+  return () => {
+    window.removeEventListener("beforeunload", clearLocalStorageOnUnload);
+  };
+}, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthContextProvider>
+      <AppRouter />
+    </AuthContextProvider>
   );
 }
 
