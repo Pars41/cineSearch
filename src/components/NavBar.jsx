@@ -3,12 +3,13 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContextProvider";
 
 const NavBar = () => {
-  const { setIsLoggedIn, isLoggedIn, setSearch, setSearchResults } =
+  const { setIsLoggedIn, isLoggedIn, setSearch,search, setSearchResults } =
     useContext(AuthContext);
-
+console.log(search);
   const handleLogout = () => {
     setIsLoggedIn(false);
     setSearch("");
+    setSearchResults([])
     localStorage.setItem("email", null);
     localStorage.setItem("password", null);
   };
