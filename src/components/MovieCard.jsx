@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const MovieCard = ({ item }) => {
@@ -16,7 +17,7 @@ const MovieCard = ({ item }) => {
   const getposterURL = (poster_path) => {
     return `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${poster_path}`;
   };
-
+ 
   return (
     <NavLink onClick={() => navigate(`${id}`)} to={id}>
       <div className=" card-main">

@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { AuthContext } from "../context/AuthContextProvider";
 import { useNavigate } from "react-router-dom";
+import NavBar from "./NavBar";
 
 const Login = () => {
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, setIsLoggedIn,shouldRender, setShouldRender } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -36,8 +37,14 @@ const Login = () => {
 
     navigate("/movies");
   };
+useEffect(() => {
+  // setShouldRender(false)
+  localStorage.clear()
+}, [])
 
   return (
+    <>
+    <NavBar logoutRender={false}/>
     <div className="login-page shadow-lg p-3 pt-4 mx-auto  rounded d-flex align-center ">
       <div className="container pt-4  bg-white">
         <Formik
@@ -90,6 +97,8 @@ const Login = () => {
         </Formik>
       </div>
     </div>
+    </>
+    
   );
 };
 

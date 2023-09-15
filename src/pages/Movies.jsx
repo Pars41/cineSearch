@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
+import NavBar from "../components/NavBar";
 import SearchBar from "../components/SearchBar";
 import { AuthContext } from "../context/AuthContextProvider";
 
@@ -27,14 +28,18 @@ console.log(isLoggedIn
 
     // Eğer kullanıcı giriş yapmamışsa ve isLoggedIn false ise, otomatik olarak login sayfasına yönlendir.
 
-    if (!isLoggedIn) {
-      navigate("/");
-    }
-
+    // if (!isLoggedIn) {
+    //   navigate("/");
+    // }
+if(!localStorage.getItem("email")&&!localStorage.getItem("password")){
+  navigate("/")
+}
    
-  }, [isLoggedIn, navigate]);
+  }, [ navigate]);
 
   return (
+    <>
+    <NavBar logoutRender={true}/>
     <div className="main-page">
       <SearchBar />
       {searchResults.length !== 0 ? null : (
@@ -69,6 +74,8 @@ console.log(isLoggedIn
             })}
       </div>
     </div>
+    </>
+    
   );
 };
 

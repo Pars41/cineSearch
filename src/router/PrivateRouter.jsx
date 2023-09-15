@@ -6,7 +6,7 @@ const PrivateRouter = () => {
   //? Consuming
   const { isLoggedIn } = useContext(AuthContext);
 
-  return isLoggedIn ? <Outlet /> : <Navigate to="/" />;
+  return (localStorage.getItem("email")&&localStorage.getItem("password")) ? <Outlet /> : <Navigate to="/" />;
 
 };
 

@@ -1,7 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
+import NavBar from "../components/NavBar";
 import SearchBar from "../components/SearchBar";
-import { AuthContext } from "../context/AuthContextProvider";
+// import { AuthContext } from "../context/AuthContextProvider";
+import React from "react";
+
 
 const MovieDetail = () => {
   const navigate = useNavigate();
@@ -11,7 +14,7 @@ const MovieDetail = () => {
   const [movies, setMovies] = useState([]);
   const [video, setVideo] = useState([]);
 
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  // const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const API_KEY = "0a06593e3ed888b80a4b7c4da86b6bb9";
   const getVideo = () => {
     fetch(
@@ -51,11 +54,13 @@ const MovieDetail = () => {
   };
   useEffect(() => {
     // Eğer kullanıcı giriş yapmamışsa ve isLoggedIn false ise, otomatik olarak login sayfasına yönlendirin.
-    if (!isLoggedIn) {
-      navigate("/");
+    if(!localStorage.getItem("email")&&!localStorage.getItem("password")){
+      navigate("/")
     }
-  }, [isLoggedIn, navigate]);
+  }, [ navigate]);
   return (
+    <><NavBar logoutRender={true}/>
+
     <div className="movie-detail">
       <SearchBar />
 
@@ -94,16 +99,17 @@ const MovieDetail = () => {
             <ul className="trailers">
               <span className="label">Watch trailers</span>:
               {video.map((item, i) => {
-                const { key } = item;
-                return (
-                  <>
-                    <a target="_blank" href={getvideoLink(key)}>
-                      {i + 1}
-                    </a>
-                    <br />
-                  </>
-                );
-              })}
+  const { key } = item;
+  return (
+    <React.Fragment key={i}>
+      <a target="_blank" href={getvideoLink(key)}>
+        {i + 1}
+      </a>
+      <br />
+    </React.Fragment>
+  );
+})}
+
             </ul>
           ) : (
             <span>No Trailer</span>
@@ -113,6 +119,8 @@ const MovieDetail = () => {
         </div>
       </div>
     </div>
+    </>
+    
   );
 };
 

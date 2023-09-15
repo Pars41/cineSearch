@@ -6,6 +6,9 @@ const AuthContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  // const [shouldRender, setShouldRender] = useState(false);
+
+  
 
   return (
     <AuthContext.Provider
@@ -16,6 +19,7 @@ const AuthContextProvider = ({ children }) => {
         setSearchResults,
         isLoggedIn,
         setIsLoggedIn,
+        // shouldRender, setShouldRender
       }}
     >
       {children}
