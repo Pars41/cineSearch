@@ -30,14 +30,11 @@ const Login = () => {
 
     localStorage.setItem("email", values.email);
     localStorage.setItem("password", values.password);
-    if (
-      localStorage.getItem("email") !== null &&
-      localStorage.getItem("password") !== null
-    ) {
-      setIsLoggedIn(true);
-    }
+   
+    setIsLoggedIn(true);
+    
 
-    navigate("/main");
+    navigate("/movies");
   };
 
   return (

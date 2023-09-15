@@ -33,15 +33,15 @@ const SearchBar = () => {
     if (event.key === "Enter") {
       getQuery();
       const currentLocation = window.location.pathname;
-      if (currentLocation !== "/main") {
-        navigate("/main");
+      if (currentLocation !== "/movies") {
+        navigate("/movies");
       }
     }
   };
   const handleSearch = () => {
     const currentLocation = window.location.pathname;
-    if (currentLocation !== "/main") {
-      navigate("/main");
+    if (currentLocation !== "/movies") {
+      navigate("/movies");
     }
     getQuery();
   };

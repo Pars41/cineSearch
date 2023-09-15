@@ -41,7 +41,6 @@ const MovieDetail = () => {
       .catch((err) => console.log(err));
     getVideo();
   }, [id]);
- 
 
   const getposterURL = (poster_path) => {
     return `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${poster_path}`;
@@ -53,14 +52,7 @@ const MovieDetail = () => {
   useEffect(() => {
     // Eğer kullanıcı giriş yapmamışsa ve isLoggedIn false ise, otomatik olarak login sayfasına yönlendirin.
     if (!isLoggedIn) {
-      navigate("/login");
-    }
-
-    if (
-      localStorage.getItem("email") === null ||
-      localStorage.getItem("password") === null
-    ) {
-      setIsLoggedIn(false);
+      navigate("/");
     }
   }, [isLoggedIn, navigate]);
   return (

@@ -19,7 +19,7 @@ console.log(search);
         <NavLink
           className="navbar-brand text-white px-5"
           onClick={() => setSearchResults([])}
-          to="main"
+          to="movies"
         >
           cineSearch
         </NavLink>

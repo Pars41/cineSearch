@@ -4,20 +4,21 @@ import PrivateRouter from "./PrivateRouter";
 import MovieDetail from "../pages/MovieDetail";
 import Movies from "../pages/Movies";
 import LoginPage from "../pages/LoginPage";
+import NotFound from "../pages/NotFound";
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
       <NavBar />
       <Routes>
-        <Route index element={<LoginPage />} />
+        <Route path="/" element={<LoginPage />} />
 
-        <Route path="main" element={<PrivateRouter />}>
+        <Route path="movies" element={<PrivateRouter />}>
           <Route path="" element={<Movies />} />
           <Route path=":id" element={<MovieDetail />} />
         </Route>
 
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/ahmet" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

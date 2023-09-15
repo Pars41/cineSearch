@@ -20,23 +20,19 @@ const Movies = () => {
   };
 
   const [movies, setMovies] = useState([]);
-
+console.log(isLoggedIn
+)
   useEffect(() => {
     getMovie();
 
     // Eğer kullanıcı giriş yapmamışsa ve isLoggedIn false ise, otomatik olarak login sayfasına yönlendir.
 
     if (!isLoggedIn) {
-      navigate("/login");
+      navigate("/");
     }
 
-    if (
-      localStorage.getItem("email") === null ||
-      localStorage.getItem("password") === null
-    ) {
-      setIsLoggedIn(false);
-    }
-  }, [isLoggedIn, navigate, setIsLoggedIn]);
+   
+  }, [isLoggedIn, navigate]);
 
   return (
     <div className="main-page">
