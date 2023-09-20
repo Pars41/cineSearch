@@ -1,5 +1,4 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import NavBar from "../components/NavBar";
 import PrivateRouter from "./PrivateRouter";
 import MovieDetail from "../pages/MovieDetail";
 import Movies from "../pages/Movies";
@@ -9,7 +8,6 @@ import NotFound from "../pages/NotFound";
 const AppRouter = () => {
   return (
     <BrowserRouter>
-      {/* <NavBar /> */}
       <Routes>
         <Route path="/" element={<LoginPage />} />
 
@@ -17,8 +15,8 @@ const AppRouter = () => {
           <Route path="" element={<Movies />} />
           <Route path=":id" element={<MovieDetail />} />
         </Route>
-
-        <Route path="/*" element={<NotFound />} />
+        
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
