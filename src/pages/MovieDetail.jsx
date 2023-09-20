@@ -1,10 +1,9 @@
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import SearchBar from "../components/SearchBar";
 // import { AuthContext } from "../context/AuthContextProvider";
 import React from "react";
-
 
 const MovieDetail = () => {
   const navigate = useNavigate();
@@ -54,73 +53,78 @@ const MovieDetail = () => {
   };
   useEffect(() => {
     // Eğer kullanıcı giriş yapmamışsa ve isLoggedIn false ise, otomatik olarak login sayfasına yönlendirin.
-    if(!localStorage.getItem("email")&&!localStorage.getItem("password")){
-      navigate("/")
+    if (!localStorage.getItem("email") && !localStorage.getItem("password")) {
+      navigate("/");
     }
-  }, [ navigate]);
+  }, [navigate]);
   return (
-    <><NavBar logoutRender={true}/>
+    <>
+      <NavBar logoutRender={true} />
 
-    <div className="movie-detail">
-      <SearchBar />
+      <div className="movie-detail">
+        <SearchBar />
 
-      <div className="overview">
-        <div className="image">
-          <img
-            className="shadow-lg p-3  bg-dark rounded"
-            src={getposterURL(movies.poster_path)}
-            alt="poster"
-          />
-        </div>
-        <div className="details">
-          {movies.overview && (
+        <div className="overview">
+          <div className="image">
+            <img
+              className="shadow-lg p-3  bg-dark rounded"
+              src={getposterURL(movies.poster_path)}
+              alt="poster"
+            />
+          </div>
+          <div className="details">
+            {movies.overview && (
+              <p>
+                <span className="label">Overview</span> : {movies.overview}
+              </p>
+            )}
+            {!movies.overview && (
+              <p>
+                <span className="label">No overview</span>
+              </p>
+            )}
+
             <p>
-              <span className="label">Overview</span> : {movies.overview}
+              <span className="label">Release Date</span> :{" "}
+              {movies.release_date}
             </p>
-          )}
-          {!movies.overview && (
             <p>
-              <span className="label">No overview</span>
+              <span className="label">Rate</span> :{" "}
+              {Math.round(movies.vote_average * 10) / 10}
             </p>
-          )}
 
-          <p>
-            <span className="label">Release Date</span> : {movies.release_date}
-          </p>
-          <p>
-            <span className="label">Rate</span> :{" "}
-            {Math.round(movies.vote_average * 10) / 10}
-          </p>
-
-          <p>
-            <span className="label">Total Vote</span> : {movies.vote_count}{" "}
-          </p>
-          {video.length !== 0 ? (
-            <ul className="trailers">
-              <span className="label">Watch trailers</span>:
-              {video.map((item, i) => {
-  const { key } = item;
-  return (
-    <React.Fragment key={i}>
-      <a className="btn btn-sm btn-light py-0 my-1" target="_blank" href={getvideoLink(key)}>
-        {i + 1}
-      </a>
-      <br />
-    </React.Fragment>
-  );
-})}
-
-            </ul>
-          ) : (
-            <span>No Trailer</span>
-          )}
-            <button className="btn btn-dark w-25"><NavLink onClick={() => navigate(-1)}>Go Back</NavLink></button>
-          
+            <p>
+              <span className="label">Total Vote</span> : {movies.vote_count}{" "}
+            </p>
+            {video.length !== 0 ? (
+              <ul className="trailers">
+                <span className="label">Watch trailers</span>:
+                {video.map((item, i) => {
+                  const { key } = item;
+                  return (
+                    <React.Fragment key={i}>
+                      <a
+                        className="btn btn-sm btn-light py-0 my-1"
+                        target="_blank"
+                        href={getvideoLink(key)}
+                      >
+                        {i + 1}
+                      </a>
+                      <br />
+                    </React.Fragment>
+                  );
+                })}
+              </ul>
+            ) : (
+              <span>No Trailer</span>
+            )}
+            <button className="btn btn-dark w-25">
+              <NavLink onClick={() => navigate(-1)}>Go Back</NavLink>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
     </>
-    
   );
 };
 
