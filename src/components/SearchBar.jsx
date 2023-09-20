@@ -3,11 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContextProvider";
 
 const SearchBar = () => {
-  const {
-    search,
-    setSearch,
-    setSearchResults,
-  } = useContext(AuthContext);
+  const { search, setSearch, setSearchResults } = useContext(AuthContext);
+  const [inputValue, setInputValue] = useState('');
   const navigate = useNavigate();
 
   const getQuery = () => {
@@ -25,7 +22,13 @@ const SearchBar = () => {
       options
     )
       .then((response) => response.json())
-      .then((response) => setSearchResults(response.results))
+      .then((response) => {
+        if (response.results.length === 0) {
+          setSearchResults('Content not found :(');
+        } else {
+          setSearchResults(response.results);
+        }
+      })
       .catch((err) => console.error(err));
   };
 
@@ -36,6 +39,7 @@ const SearchBar = () => {
       if (currentLocation !== "/movies") {
         navigate("/movies");
       }
+      setInputValue('')
     }
   };
   const handleSearch = () => {
@@ -44,6 +48,9 @@ const SearchBar = () => {
       navigate("/movies");
     }
     getQuery();
+    setInputValue('')
+
+    
   };
 
   return (
@@ -58,7 +65,9 @@ const SearchBar = () => {
               placeholder="Search a movie, tv show or actor.."
               onChange={(event) => {
                 setSearch(event.target.value);
+                setInputValue(event.target.value)
               }}
+              value={inputValue}
               onKeyPress={handleKeyPress}
               autoFocus
             />

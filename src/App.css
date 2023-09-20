@@ -96,7 +96,7 @@
   padding: 0.5rem;
 }
 .trailers a:hover {
-  background-color: coral;
+  background-color: rgba(218, 206, 32, 0.655);
   color: white;
   border-radius: 0.5rem;
 }
@@ -195,8 +195,23 @@
     rgba(0, 0, 0, 0) 0%,
     rgba(0, 0, 0, 0.4) 100%
   );
+ 
 }
 .label {
   background-color: rgba(218, 206, 32, 0.655);
   font-weight: 600;
+  padding: 5px;
+  border-radius: 10px;
+}
+.no-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: calc(100vh - 190px);
+}
+.header{
+  text-shadow: 3px 3px 50px #000000,
+    -2px 1px 20px #000000;
+    color: white;
 }

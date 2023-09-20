@@ -21,38 +21,47 @@ const Movies = () => {
   };
 
   const [movies, setMovies] = useState([]);
-console.log(isLoggedIn
-)
+  console.log(searchResults);
   useEffect(() => {
     getMovie();
 
-    // Eğer kullanıcı giriş yapmamışsa ve isLoggedIn false ise, otomatik olarak login sayfasına yönlendir.
+    // Eğer kullanıcı giriş yapmamışsa, otomatik olarak login sayfasına yönlendir.
 
-    // if (!isLoggedIn) {
-    //   navigate("/");
-    // }
-if(!localStorage.getItem("email")&&!localStorage.getItem("password")){
-  navigate("/")
-}
-   
-  }, [ navigate]);
+    if (!localStorage.getItem("email") && !localStorage.getItem("password")) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   return (
     <>
-    <NavBar logoutRender={true}/>
-    <div className="main-page">
-      <SearchBar />
-      {searchResults.length !== 0 ? null : (
-        <div className="mb-4 text-center">
-          <h3>Trending Movies</h3>
-        </div>
-      )}
+      <NavBar logoutRender={true} />
+      <div className="main-page">
+        <SearchBar />
+        {searchResults.length !== 0 ? null : (
+          <div className="mb-4 text-center">
+            <h2 className="header">Trending Movies</h2>
+          </div>
+        )}
 
-      <div className="main-content">
-        {searchResults.length !== 0
-          ? searchResults
-              .filter((item) => item.poster_path && item.backdrop_path) // Sadece poster_path ve backdrop_path'i olanları getir
-              .map((item, i) => {
+        <div className="main-content">
+          {searchResults.length !== 0
+            ? (typeof searchResults !== 'string' ? searchResults
+                .filter((item) => item.poster_path && item.backdrop_path) // Sadece poster_path ve backdrop_path'i olanları getir
+                .map((item, i) => {
+                  const { id } = item;
+                  return (
+                    <MovieCard
+                      item={item}
+                      key={i}
+                      onClick={() => navigate(`${id}`)}
+                    />
+                  );
+                }) : 
+                  
+                  <MovieCard item={searchResults} />
+                
+                )
+            : movies.map((item, i) => {
                 const { id } = item;
                 return (
                   <MovieCard
@@ -61,21 +70,10 @@ if(!localStorage.getItem("email")&&!localStorage.getItem("password")){
                     onClick={() => navigate(`${id}`)}
                   />
                 );
-              })
-          : movies.map((item, i) => {
-              const { id } = item;
-              return (
-                <MovieCard
-                  item={item}
-                  key={i}
-                  onClick={() => navigate(`${id}`)}
-                />
-              );
-            })}
+              })}
+        </div>
       </div>
-    </div>
     </>
-    
   );
 };
 

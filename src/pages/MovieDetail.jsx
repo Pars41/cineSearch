@@ -102,7 +102,7 @@ const MovieDetail = () => {
   const { key } = item;
   return (
     <React.Fragment key={i}>
-      <a target="_blank" href={getvideoLink(key)}>
+      <a className="btn btn-sm btn-light py-0 my-1" target="_blank" href={getvideoLink(key)}>
         {i + 1}
       </a>
       <br />
@@ -114,8 +114,8 @@ const MovieDetail = () => {
           ) : (
             <span>No Trailer</span>
           )}
-
-          <NavLink onClick={() => navigate(-1)}>Go Back</NavLink>
+            <button className="btn btn-dark w-25"><NavLink onClick={() => navigate(-1)}>Go Back</NavLink></button>
+          
         </div>
       </div>
     </div>

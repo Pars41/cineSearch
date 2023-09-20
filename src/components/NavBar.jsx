@@ -15,7 +15,7 @@ console.log(isLoggedIn)
  
 
   return (
-    <nav className="navbar bg-dark text-white navbar-expand-lg bg-body-tertiary px-4 mb-0">
+    <nav className="navbar-main navbar bg-dark text-white navbar-expand-lg bg-body-tertiary px-4 mb-0">
       <div className="d-flex justify-content-between w-100">
         <NavLink
           className="navbar-brand text-white px-5"
