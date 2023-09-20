@@ -18,7 +18,7 @@ const AppRouter = () => {
           <Route path=":id" element={<MovieDetail />} />
         </Route>
 
-        <Route path="/ahmet" element={<NotFound />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
